@@ -7,11 +7,18 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background-color: #ffe6f0;
+            overflow: hidden;
         }
         h1 {
-            margin-top: 100px;
+            margin-top: 80px;
             font-size: 40px;
             color: #ff3366;
+        }
+        #message {
+            font-size: 22px;
+            color: #cc0066;
+            height: 40px;
+            margin-top: 10px;
         }
         #yesBtn, #noBtn {
             padding: 15px 30px;
@@ -20,6 +27,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         #yesBtn {
             background-color: #ff4d4d;
@@ -36,23 +44,44 @@
 <body>
 
 <h1>Will you be my Valentine? ❤️</h1>
+<div id="message"></div>
 
 <button id="yesBtn" onclick="yesClicked()">YES 💖</button>
 <button id="noBtn" onmouseover="moveButton()">NO 😜</button>
 
 <script>
+let noCount = 0;
+
+const messages = [
+    "Nice try 😜",
+    "You can't escape love!",
+    "Wrong choice detected 🚨",
+    "That button is allergic to your mouse 😂",
+    "Why are you running? 🏃‍♂️",
+    "Just press YES already 🙄",
+    "This is getting awkward 😅",
+    "Okay now you're just being stubborn 😭"
+];
+
 function yesClicked() {
     document.body.innerHTML = "<h1>Yayyy!! 💘 You made me the happiest person! 😍</h1>";
 }
 
 function moveButton() {
-    var btn = document.getElementById("noBtn");
-    var x = Math.random() * (window.innerWidth - btn.clientWidth);
-    var y = Math.random() * (window.innerHeight - btn.clientHeight);
+    const btn = document.getElementById("noBtn");
+    const msg = document.getElementById("message");
+    const yesBtn = document.getElementById("yesBtn");
+
+    // Move NO button
+    const x = Math.random() * (window.innerWidth - btn.clientWidth);
+    const y = Math.random() * (window.innerHeight - btn.clientHeight);
     btn.style.left = x + "px";
     btn.style.top = y + "px";
-}
-</script>
 
-</body>
-</html>
+    // Show funny message
+    msg.innerText = messages[noCount % messages.length];
+
+    // Make YES button bigger
+    let size = 20 + (noCount * 2);
+    yesBtn.style.fontSize = size + "px";
+    yesBtn.style.padding = (15 + noCo
